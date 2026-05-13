@@ -4,14 +4,14 @@ apply plugin: 'com.chaquo.python'
 
 android {
 
-    compileSdkVersion 34
+    compileSdkVersion 31
 
     defaultConfig {
 
         applicationId "com.kurox.qwerty"
 
         minSdkVersion 23
-        targetSdkVersion 34
+        targetSdkVersion 31
 
         versionCode 1
         versionName "1.0"
