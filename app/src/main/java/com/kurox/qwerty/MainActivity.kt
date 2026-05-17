@@ -100,25 +100,16 @@ class MainActivity : AppCompatActivity() {
                         output.text = "HTML Executed"
                     }
 
-                    code.trim().startsWith("print(") -> {
-
-                        val py = Python.getInstance()
-                        val module = py.getModule("builtins")
-
-                        output.text = "Python:\n$code"
-                    }
-
-                    code.contains("console.log") -> {
-
-                        val html = """
-                            <html>
-                            <body>
-                            <script>
-                            $code
-                            </script>
-                            </body>
-                            </html>
-                        """.trimIndent()
+                    code.trim().startsWith("print(") || code.contains("import ") -> {
+    try {
+        val py = Python.getInstance()
+        val result = py.getModule("__main__").callAttr("exec", code).toString()
+        output.text = "Python Output:\n$result"
+    } catch (e: Exception) {
+        output.text = "Python Error:\n${e.message}"
+        e.printStackTrace()
+    }
+}
 
                         webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
 
