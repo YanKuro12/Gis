@@ -24,9 +24,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!Python.isStarted()) {
+        try {
+    if (!Python.isStarted()) {
+        try {
             Python.start(AndroidPlatform(this))
+        } catch (e: Exception) {
+            Log.e("Python", "Failed: ${e.message}")
         }
+    }
+} catch (e: Exception) {
+    Log.e("MainActivity", "Error: ${e.message}")
+}
 
         val layout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
