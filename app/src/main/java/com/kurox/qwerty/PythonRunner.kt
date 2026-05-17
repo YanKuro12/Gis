@@ -1,11 +1,21 @@
 package com.kurox.qwerty
 
-fun run(code: String): String {
-    return try {
-        val py = Python.getInstance()
-        val result = py.getModule("__main__").callAttr("exec", code)
-        "Python Execution Result:\n$result"
-    } catch (e: Exception) {
-        "Python Error: ${e.message}"
+import com.chaquo.python.Python
+
+object PythonRunner {
+
+    fun run(code: String): String {
+        return try {
+            if (!Python.isStarted()) {
+                "Python is not initialized"
+            } else {
+                val py = Python.getInstance()
+                val module = py.getModule("__main__")
+                val result = module.callAttr("exec", code).toString()
+                "Python Output:\n$result"
+            }
+        } catch (e: Exception) {
+            "Python Error: ${e.message}"
+        }
     }
 }
