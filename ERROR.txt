@@ -1,0 +1,317 @@
+   Compiling kuro_compiler v0.1.0 (C:\Users\Administrator\Downloads\kuro-language\kuro-language\crates\kuro_compiler)
+warning: unused import: `Diagnostic`
+ --> crates\kuro_compiler\src\compiler.rs:7:24
+  |
+7 | use kuro_diagnostics::{Diagnostic, Diagnostics};
+  |                        ^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+error[E0204]: the trait `std::marker::Copy` cannot be implemented for this type
+   --> crates\kuro_compiler\src\codegen.rs:186:8
+    |
+185 | #[derive(Debug, Clone, Copy)]
+    |                        ---- in this derive macro expansion
+186 | struct LoopTargets {
+    |        ^^^^^^^^^^^
+187 |     break_block: Block,
+    |     ------------------ this field does not implement `std::marker::Copy`
+
+error[E0608]: cannot index into a value of type `&ModuleDeclarations`
+   --> crates\kuro_compiler\src\codegen.rs:131:61
+    |
+131 |         self.ctx.func.signature = self.module.declarations()[info.id].signature.clone();
+    |                                                             ^^^^^^^^^
+
+error[E0061]: this method takes 1 argument but 0 arguments were supplied
+   --> crates\kuro_compiler\src\codegen.rs:173:17
+    |
+173 |         builder.finalize();
+    |                 ^^^^^^^^-- argument #1 of type `TargetFrontendConfig` is missing
+    |
+note: method defined here
+   --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-frontend-0.134.4\src\frontend.rs:704:12
+    |
+704 |     pub fn finalize(mut self, frontend_config: TargetFrontendConfig) {
+    |            ^^^^^^^^
+help: provide the argument
+    |
+173 |         builder.finalize(/* TargetFrontendConfig */);
+    |                          ++++++++++++++++++++++++++
+
+error[E0308]: mismatched types
+   --> crates\kuro_compiler\src\codegen.rs:407:32
+    |
+407 |             builder.ins().jump(target.break_block, &[]);
+    |                           ---- ^^^^^^^^^^^^^^^^^^ expected `cranelift::prelude::Block`, found `kuro_ast::Block`
+    |                           |
+    |                           arguments to this method are incorrect
+    |
+    = note: `kuro_ast::Block` and `cranelift::prelude::Block` have similar names, but are actually distinct types
+note: `kuro_ast::Block` is defined in crate `kuro_ast`
+   --> crates\kuro_ast\src\stmt.rs:7:1
+    |
+  7 | pub struct Block {
+    | ^^^^^^^^^^^^^^^^
+note: `cranelift::prelude::Block` is defined in crate `cranelift_codegen`
+   --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\ir\entities.rs:38:1
+    |
+ 38 | pub struct Block(u32);
+    | ^^^^^^^^^^^^^^^^
+note: method defined here
+   --> C:\Users\Administrator\Downloads\kuro-language\kuro-language\target\debug\build\cranelift-codegen-77074e75e0a446cb\out/inst_builder.rs:29:8
+    |
+ 29 |     fn jump<'a>(mut self, block_call_label: ir::Block, block_call_args: impl IntoIterator<...
+    |        ^^^^
+
+error[E0308]: mismatched types
+   --> crates\kuro_compiler\src\codegen.rs:418:32
+    |
+418 |             builder.ins().jump(target.continue_block, &[]);
+    |                           ---- ^^^^^^^^^^^^^^^^^^^^^ expected `cranelift::prelude::Block`, found `kuro_ast::Block`
+    |                           |
+    |                           arguments to this method are incorrect
+    |
+    = note: `kuro_ast::Block` and `cranelift::prelude::Block` have similar names, but are actually distinct types
+note: `kuro_ast::Block` is defined in crate `kuro_ast`
+   --> crates\kuro_ast\src\stmt.rs:7:1
+    |
+  7 | pub struct Block {
+    | ^^^^^^^^^^^^^^^^
+note: `cranelift::prelude::Block` is defined in crate `cranelift_codegen`
+   --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\ir\entities.rs:38:1
+    |
+ 38 | pub struct Block(u32);
+    | ^^^^^^^^^^^^^^^^
+note: method defined here
+   --> C:\Users\Administrator\Downloads\kuro-language\kuro-language\target\debug\build\cranelift-codegen-77074e75e0a446cb\out/inst_builder.rs:29:8
+    |
+ 29 |     fn jump<'a>(mut self, block_call_label: ir::Block, block_call_args: impl IntoIterator<...
+    |        ^^^^
+
+error[E0308]: mismatched types
+   --> crates\kuro_compiler\src\codegen.rs:495:22
+    |
+495 |         break_block: exit,
+    |                      ^^^^ expected `kuro_ast::Block`, found `cranelift::prelude::Block`
+    |
+    = note: `cranelift::prelude::Block` and `kuro_ast::Block` have similar names, but are actually distinct types
+note: `cranelift::prelude::Block` is defined in crate `cranelift_codegen`
+   --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\ir\entities.rs:38:1
+    |
+ 38 | pub struct Block(u32);
+    | ^^^^^^^^^^^^^^^^
+note: `kuro_ast::Block` is defined in crate `kuro_ast`
+   --> crates\kuro_ast\src\stmt.rs:7:1
+    |
+  7 | pub struct Block {
+    | ^^^^^^^^^^^^^^^^
+
+error[E0308]: mismatched types
+   --> crates\kuro_compiler\src\codegen.rs:496:25
+    |
+496 |         continue_block: header,
+    |                         ^^^^^^ expected `kuro_ast::Block`, found `cranelift::prelude::Block`
+    |
+    = note: `cranelift::prelude::Block` and `kuro_ast::Block` have similar names, but are actually distinct types
+note: `cranelift::prelude::Block` is defined in crate `cranelift_codegen`
+   --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\ir\entities.rs:38:1
+    |
+ 38 | pub struct Block(u32);
+    | ^^^^^^^^^^^^^^^^
+note: `kuro_ast::Block` is defined in crate `kuro_ast`
+   --> crates\kuro_ast\src\stmt.rs:7:1
+    |
+  7 | pub struct Block {
+    | ^^^^^^^^^^^^^^^^
+
+error[E0308]: mismatched types
+   --> crates\kuro_compiler\src\codegen.rs:547:22
+    |
+547 |         break_block: exit,
+    |                      ^^^^ expected `kuro_ast::Block`, found `cranelift::prelude::Block`
+    |
+    = note: `cranelift::prelude::Block` and `kuro_ast::Block` have similar names, but are actually distinct types
+note: `cranelift::prelude::Block` is defined in crate `cranelift_codegen`
+   --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\ir\entities.rs:38:1
+    |
+ 38 | pub struct Block(u32);
+    | ^^^^^^^^^^^^^^^^
+note: `kuro_ast::Block` is defined in crate `kuro_ast`
+   --> crates\kuro_ast\src\stmt.rs:7:1
+    |
+  7 | pub struct Block {
+    | ^^^^^^^^^^^^^^^^
+
+error[E0308]: mismatched types
+   --> crates\kuro_compiler\src\codegen.rs:548:25
+    |
+548 |         continue_block: latch,
+    |                         ^^^^^ expected `kuro_ast::Block`, found `cranelift::prelude::Block`
+    |
+    = note: `cranelift::prelude::Block` and `kuro_ast::Block` have similar names, but are actually distinct types
+note: `cranelift::prelude::Block` is defined in crate `cranelift_codegen`
+   --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\ir\entities.rs:38:1
+    |
+ 38 | pub struct Block(u32);
+    | ^^^^^^^^^^^^^^^^
+note: `kuro_ast::Block` is defined in crate `kuro_ast`
+   --> crates\kuro_ast\src\stmt.rs:7:1
+    |
+  7 | pub struct Block {
+    | ^^^^^^^^^^^^^^^^
+
+warning: use of deprecated method `cranelift::prelude::InstBuilder::iadd_imm`: use `iadd_imm_s` (sign-extends the immediate) or `iadd_imm_u` (zero-extends the immediate) instead
+   --> crates\kuro_compiler\src\codegen.rs:560:30
+    |
+560 |     let next = builder.ins().iadd_imm(current, 1);
+    |                              ^^^^^^^^
+    |
+    = note: `#[warn(deprecated)]` on by default
+
+error[E0599]: no method named `frem` found for struct `FuncInstBuilder<'short, 'long>` in the current scope
+   --> crates\kuro_compiler\src\codegen.rs:716:27
+    |
+716 |             builder.ins().frem(lhs, rhs)
+    |                           ^^^^
+    |
+help: there is a method `srem` with a similar name
+    |
+716 -             builder.ins().frem(lhs, rhs)
+716 +             builder.ins().srem(lhs, rhs)
+    |
+
+error[E0271]: type mismatch resolving `<&[Value; 1] as IntoIterator>::Item == &BlockArg`
+   --> crates\kuro_compiler\src\codegen.rs:813:36
+    |
+813 |     builder.ins().jump(join_block, &[short_value]);
+    |                   ----             ^^^^^^^^^^^^^^ expected `&BlockArg`, found `&Value`
+    |                   |
+    |                   required by a bound introduced by this call
+    |
+    = note: expected reference `&BlockArg`
+               found reference `&cranelift::prelude::Value`
+note: required by a bound in `jump`
+   --> C:\Users\Administrator\Downloads\kuro-language\kuro-language\target\debug\build\cranelift-codegen-77074e75e0a446cb\out/inst_builder.rs:29:91
+    |
+ 29 | ...toIterator<Item = &'a BlockArg>) -> Inst {
+    |               ^^^^^^^^^^^^^^^^^^^ required by this bound in `InstBuilder::jump`
+
+error[E0271]: type mismatch resolving `<&[Value; 1] as IntoIterator>::Item == &BlockArg`
+   --> crates\kuro_compiler\src\codegen.rs:822:36
+    |
+822 |     builder.ins().jump(join_block, &[right_bool]);
+    |                   ----             ^^^^^^^^^^^^^ expected `&BlockArg`, found `&Value`
+    |                   |
+    |                   required by a bound introduced by this call
+    |
+    = note: expected reference `&BlockArg`
+               found reference `&cranelift::prelude::Value`
+note: required by a bound in `jump`
+   --> C:\Users\Administrator\Downloads\kuro-language\kuro-language\target\debug\build\cranelift-codegen-77074e75e0a446cb\out/inst_builder.rs:29:91
+    |
+ 29 | ...toIterator<Item = &'a BlockArg>) -> Inst {
+    |               ^^^^^^^^^^^^^^^^^^^ required by this bound in `InstBuilder::jump`
+
+error[E0308]: mismatched types
+  --> crates\kuro_compiler\src\compiler.rs:89:38
+   |
+89 |             match ObjectBuilder::new(isa, "kuro_module", default_libcall_names()) {
+   |                   ------------------ ^^^ expected `Arc<dyn TargetIsa>`, found `Box<dyn TargetIsa>`
+   |                   |
+   |                   arguments to this function are incorrect
+   |
+   = note: expected struct `Arc<(dyn TargetIsa + 'static)>`
+              found struct `Box<dyn TargetIsa>`
+note: associated function defined here
+  --> C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-object-0.134.4\src\backend.rs:49:12
+   |
+49 |     pub fn new<V: Into<Vec<u8>>>(
+   |            ^^^
+help: call `Into::into` on this expression to convert `Box<dyn TargetIsa>` into `Arc<(dyn TargetIsa + 'static)>`
+   |
+89 |             match ObjectBuilder::new(isa.into(), "kuro_module", default_libcall_names()) {
+   |                                         +++++++
+
+error[E0599]: no method named `set` found for struct `cranelift::prelude::settings::Builder` in the current scope
+   --> crates\kuro_compiler\src\compiler.rs:140:14
+    |
+139 | /         flags_builder
+140 | |             .set("opt_level", self.options.optimization_level.as_cranelift())
+    | |             -^^^ method not found in `cranelift::prelude::settings::Builder`
+    | |_____________|
+    |
+    |
+   ::: C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\settings.rs:38:8
+    |
+ 38 |       fn set(&mut self, name: &str, value: &str) -> SetResult<()>;
+    |          --- the method is available for `cranelift::prelude::settings::Builder` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+help: trait `Configurable` which provides `set` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use cranelift::prelude::Configurable;
+    |
+
+error[E0599]: no method named `set` found for struct `cranelift::prelude::settings::Builder` in the current scope
+   --> crates\kuro_compiler\src\compiler.rs:144:14
+    |
+143 | /         flags_builder
+144 | |             .set("is_pic", "true")
+    | |             -^^^ method not found in `cranelift::prelude::settings::Builder`
+    | |_____________|
+    |
+    |
+   ::: C:\Users\Administrator\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\cranelift-codegen-0.134.4\src\settings.rs:38:8
+    |
+ 38 |       fn set(&mut self, name: &str, value: &str) -> SetResult<()>;
+    |          --- the method is available for `cranelift::prelude::settings::Builder` here
+    |
+    = help: items from traits can only be used if the trait is in scope
+help: trait `Configurable` which provides `set` is implemented but not in scope; perhaps you want to import it
+    |
+  1 + use cranelift::prelude::Configurable;
+    |
+
+error[E0308]: mismatched types
+   --> crates\kuro_compiler\src\compiler.rs:151:9
+    |
+135 |       ) -> Result<Box<dyn cranelift::codegen::isa::TargetIsa>, CompileError> {
+    |            ----------------------------------------------------------------- expected `Result<Box<dyn TargetIsa>, CompileError>` because of return type
+...
+151 | /         builder
+152 | |             .finish(flags)
+153 | |             .map_err(|e| CompileError::Backend(e.to_string()))
+    | |______________________________________________________________^ expected `Result<Box<dyn TargetIsa>, CompileError>`, found `Result<Arc<dyn TargetIsa>, CompileError>`
+    |
+    = note: expected enum `std::result::Result<Box<(dyn TargetIsa + 'static)>, _>`
+               found enum `std::result::Result<Arc<dyn TargetIsa>, _>`
+    = note: the full name for the type has been written to 'C:\Users\Administrator\Downloads\kuro-language\kuro-language\target\debug\deps\kuro_compiler-24fb2ed7d8d1412a.long-type-14920231844503006287.txt'
+    = note: consider using `--verbose` to print the full type name to the console
+
+warning: unused import: `Module`
+ --> crates\kuro_compiler\src\compiler.rs:4:48
+  |
+4 | use cranelift::module::{default_libcall_names, Module};
+  |                                                ^^^^^^
+
+error[E0004]: non-exhaustive patterns: `(TargetPlatform::Android, TargetArch::X86_64)` not covered
+  --> crates\kuro_compiler\src\target.rs:88:15
+   |
+88 |         match (self.platform, self.arch) {
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^ pattern `(TargetPlatform::Android, TargetArch::X86_64)` not covered
+   |
+   = note: the matched value is of type `(TargetPlatform, TargetArch)`
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown
+   |
+97 ~             },
+98 +             (TargetPlatform::Android, TargetArch::X86_64) => todo!()
+   |
+
+Some errors have detailed explanations: E0004, E0061, E0204, E0271, E0308, E0599, E0608.
+For more information about an error, try `rustc --explain E0004`.
+warning: `kuro_compiler` (lib) generated 3 warnings
+error: could not compile `kuro_compiler` (lib) due to 17 previous errors; 3 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+
+C:\Users\Administrator\Downloads\kuro-language\kuro-language>
